@@ -33,6 +33,21 @@ bash <(curl -fsSL https://raw.githubusercontent.com/agessaman/meshcore-packet-ca
 bash <(curl -fsSL https://raw.githubusercontent.com/agessaman/meshcore-packet-capture/main/uninstall.sh)
 ```
 
+## Internationalized Installer
+
+- The installer now supports localized messaging for English (`en`) and Spanish (`es`).  
+- Language is detected in this order: `--lang` flag, `INSTALL_LANG` env var, then the system `LANG`.  
+- Example forcing Spanish:
+  ```bash
+  bash <(curl -fsSL https://raw.githubusercontent.com/agessaman/meshcore-packet-capture/main/install.sh) --lang es
+  ```
+- Translators can add/update strings in `i18n/translations.json`, then run:
+  ```bash
+  python3 scripts/generate_i18n_snippet.py
+  ```
+  which regenerates the lookup table embedded in `install.sh`.
+- CI/local validation is available via `scripts/check_i18n.sh` (runs the generator in `--check` mode to ensure the installer is in sync with the source JSON).
+
 ## Features
 
 - **Companion Radio Packet Capture**: Captures incoming packets from MeshCore Companion devices
